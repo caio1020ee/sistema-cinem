@@ -8,48 +8,21 @@ $id_sessao = 0;
 //Verificando se o parâmetro Nome foi enviado pelo get_browser
 if(isset($_GET['Id_sessao'])){
     //echo 'Funcionou get';
-    $Id = mysqli_real_escape_string($conn,$_GET['Id_sessao']);
-    $sql = "SELECT l.Id_lugar as Id_lugar,L.Id_sessao AS Id_sessao,l.Id_sala as Id_sala,l.Linha as Linha, l.Coluna as Coluna,l.Ocupado as Ocupado,sa.Colunas as Total_colunas, sa.Linhas as Total_linhas FROM lugar l, sala sa WHERE Id_sessao = $Id AND L.Id_sala = sa.Numero;";
-    //echo $sql;   
-    $result =  mysqli_query($conn,$sql);
-    $lugares = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    
-    //limpa a memoria de result
-    mysqli_free_result($result);
-
-    
-    //Sessão
-	$sql3 = "SELECT s.Id_sessao AS Codigo, s.Id_sala AS Sala, f.Nome AS Filme, s.Dia AS Dia , s.Hora AS Hora FROM sessao s, filme f WHERE s.Id_filme = f.Id and s.Id_sessao = $Id;";
-	$result3 = mysqli_query($conn,$sql3);
-	$sessao = mysqli_fetch_assoc($result3);
-    $id_sessao = $sessao['Codigo'];
-
-    $sl = intval($sessao['Sala']);
-    
-
-    //Limites de linha e coluna
-    $sql2 = "SELECT sala.Colunas as Colunas, sala.Linhas as Linhas FROM sessao, sala WHERE sessao.Id_sala = sala.Numero AND sessao.Id_sala =$sl;";
-    $result2 = mysqli_query($conn,$sql2);
-    $lc = mysqli_fetch_assoc($result2);
- 
-    mysqli_free_result($result2);
-
-
-    
-    //mysqli_free_result($result3);
-    //fecha conexão
-    mysqli_close($conn);
+    $Id_sessao = mysqli_real_escape_string($conn,$_GET['Id_sessao']);
+    include('lugares_conec.php');
 
 }else{
     //echo 'Erro get';
 }
 
-//Deletar filme do banco de dados
+//Confirmar dados
 if(isset($_POST['comprar'])){
+     
    //Limpando a query
    //echo 'Comprar';
    $Id_sessao =  mysqli_real_escape_string($conn,$_POST['Id_sessao']);
+   $id_sessao = $Id_sessao;
+   include('lugares_conec.php'); 
    //echo $Id_sessao;
    $lu =  mysqli_real_escape_string($conn,$_POST['Lugar']);
 
@@ -57,6 +30,7 @@ if(isset($_POST['comprar'])){
    
 
    if(empty($_POST['Lugar'])){
+      
     //echo 'Lugar obrigatório <br/>';
     $erros['Lugar'] = "Lugar obrigatório";
    }else{
@@ -65,15 +39,16 @@ if(isset($_POST['comprar'])){
            $erros['Lugar'] = 'Digite lugar válido (numero)';
            $Lugar = '';
      }else{
-          $sqllugar = "SELECT Id_lugar FROM lugar WHERE Id_lugar = $lu AND Id_sessao = $Id_sessao;";
+          $sqllugar = "SELECT * FROM lugar WHERE Id_lugar = $lu AND Id_sessao = $Id_sessao;";
           $rl = mysqli_query($conn,$sqllugar);
-          $lug = intval(mysqli_fetch_assoc($rl));
-
-          if($lug){
+          $lug = mysqli_fetch_assoc($rl);
+          
+          //echo $lug['Ocupado'];
+          if($lug && $lug['Ocupado'] != 1){
             $Lugar = $_POST['Lugar'];  
             //echo "Lugar funcionou";
           }else{
-              $erros['Lugar'] = "Lugar não encontrado, digite outro.";
+              $erros['Lugar'] = "Digite outro lugar.";
               //echo "Lugar não encontrado, digite outro.";  
           }
           
@@ -101,7 +76,7 @@ if(isset($_POST['comprar'])){
     //Verificando preço
     if(empty($_POST['Preco'])){
         //echo 'Preço obrigatório <br/>';
-        $erros['Tipo'] = "Preço obrigatório";
+        $erros['Preco'] = "Preço obrigatório";
     }else{
         //$_POST['Preco']
         $tep = str_replace(',','.',strval($_POST['Preco']));
@@ -148,7 +123,7 @@ if(isset($_POST['comprar'])){
     }
 
 
-   
+    mysqli_close($conn);
 
    
 }
@@ -222,7 +197,7 @@ function cor_assento($ocu){
 		<label>Preço</label>
 		<input type="text" name="Preco" value="<?php echo $Preco?>">
 		<div class="red-text"><?php echo $erros['Preco'].'<br/>'?> </div>
-
+        
 		
 
 		<div class="center" style="margin-top: 10px;">

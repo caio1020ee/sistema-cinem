@@ -79,17 +79,17 @@ if(isset($_POST['deletar'])){
 
 <div style="padding-left: 50px; padding-right: 50px;  padding-top:30px">
     <div  style="border: 2px solid; color:black;     background-color:white">
-        <div class="row" style="border: 5px solid; color:grey; display:flex; ">
-            
-            <div class="column" style="border: 5px solid; color:red; width:150px; height:200px">
-            
-            <h6>Imagem</h6>
-            
+        <div class="row" style="display:flex; ">
+        <div class="column" style="padding: 3px;" >
+                
+                <img src="posteres/<?php echo htmlspecialchars($filme['Poster']) ?>" alt="poster" style="width: 150px;height:200px">
+              
 
-            
+              
             </div>
+            
             <!--Segunda coluna--> 
-            <div class="column card-content" style="font-size: 15px; color: black">
+            <div class="column card-content" style="font-size: 15px; color: black; padding: 10px;">
                 <p>Nome: <?php echo htmlspecialchars($filme['Nome']) ?></p>
                 <p>Ano: <?php echo htmlspecialchars($filme['Ano']) ?> </p>
                 <p>Diretor: <?php echo htmlspecialchars($filme['Diretor']) ?></p>

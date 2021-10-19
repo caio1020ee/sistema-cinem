@@ -33,17 +33,20 @@ include('config/conexao.php');
     $del_lugares = "DELETE FROM lugar WHERE Id_sala = $ns;";
     
     //Removendo do BD
-    if(mysqli_query($conn,$del_sessoes)){
     if(mysqli_query($conn,$del_lugares)){
+    if(mysqli_query($conn,$del_sessoes)){
+    
     if(mysqli_query($conn,$sql)){
         //Sucesso
         header('Location: lista_salas_adm.php');
     }else{
-        //echo 'Deletar sala query error'.mysqli_error($conn);
+        echo 'Deletar sala query error'.mysqli_error($conn);
     }
     }else{
-        //echo 'Erro no deletar dos lugares';
+        echo 'Erro no deletar dos lugares';
     }
+    }else{
+        echo 'Deletar lugares query error'.mysqli_error($conn);
     }
     
     }
@@ -64,9 +67,9 @@ include('config/conexao.php');
 <?php foreach ($salas as $sala) {?>
     <div class="center-align">
         <div class="center-align"style="padding-left: 50px; padding-right:50px; display: inline-block;">
-        <a href="lugares.php">
+        
             <div  class="center-align btn red" style="background-color:red;  border: 1px solid; border-color:black; ">Sala <?php echo htmlspecialchars($sala['Numero'])?>  Linhas: <?php echo htmlspecialchars($sala['Linhas'])?> Colunas: <?php echo htmlspecialchars($sala['Colunas']) ?> Assentos: <?php echo htmlspecialchars($sala['Assentos']) ?>  </div>
-        </a>
+        
         </div>
         <form action="lista_salas_adm.php" method="POST" class="center" style="display: inline-block;">
             <input type="hidden" name="Numero_sala" value = "<?php echo $sala['Numero'];?>">
