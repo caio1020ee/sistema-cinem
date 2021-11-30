@@ -17,9 +17,7 @@
   //fecha conexão
   mysqli_close($conn);
 
-  //print_r($pizzas);
-  //print_r($filmes[0]['Nome']);
-  # Mesma finalidade do comando split
+
   
 
 
@@ -29,7 +27,7 @@
 
 <!DOCTYPE html>
 <html>
-	
+	<link rel="stylesheet" href="estilos/estilo.css">
 	<?php include('templates/header.php'); ?>
 	
 	<h4 class="center blue-text">Todos os ingressos</h4>
@@ -38,14 +36,14 @@
     <div class="container" >
       <div class="column">
          
-        <!--class="card z-depth-0" -->
+
         <?php foreach($ingressos as $ingresso) {?>
          <div  >
-            <div class="row" style="background-color:white; border: 5px solid; color:grey; display:flex">
+            <div class="row caixa_ingresso">
                 
                 
                <!--Segunda coluna--> 
-                <div class="column card-content" style="font-size: 15px; color: black">
+                <div class="column card-content info_ingresso">
                    <p>Ingresso: <?php echo htmlspecialchars($ingresso['Ingresso'])?> </p>
                    <p>Tipo: <?php echo htmlspecialchars($ingresso['Tipo'])?></p>
                    <p>Preço: <?php echo htmlspecialchars($ingresso['Preco'])?></p>

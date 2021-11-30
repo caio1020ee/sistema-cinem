@@ -12,7 +12,6 @@ $sessoes =  mysqli_fetch_all($se_result, MYSQLI_ASSOC);//Mais de 1 linha
 mysqli_free_result($se_result);
 
 
-//echo $sessoes;
     
 mysqli_close($conn);
 
@@ -20,10 +19,9 @@ mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
-
+<link rel="stylesheet" href="estilos/estilo.css">
 <?php include('templates/header.php'); ?>
 
-<!--Editar e excluir filme-->
 <h3 class="center-align">Lista de sessões</h3>
 
 <br>
@@ -35,7 +33,7 @@ mysqli_close($conn);
         <div class="center-align"style="padding-left: 50px; padding-right:50px">
    
         <a href="sessao_adm.php?Id_sessao=<?php echo htmlspecialchars($sessao['Codigo'])?>">
-            <div  class=" column card-content left-align red" style="background-color:red;  border: 1px solid; border-color:black;  ">
+            <div  class=" column card-content left-align red sessao" >
 <pre style="color: black;">
  Id: <?php echo htmlspecialchars($sessao['Codigo'])?>   
  Sala <?php echo htmlspecialchars($sessao['Sala'])?> 

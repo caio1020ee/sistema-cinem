@@ -7,7 +7,7 @@ $id_sessao = 0;
 
 //Verificando se o parâmetro Nome foi enviado pelo get_browser
 if(isset($_GET['Id_sessao'])){
-    //echo 'Funcionou get';
+ 
     $Id_sessao = mysqli_real_escape_string($conn,$_GET['Id_sessao']);
     include('lugares_conec.php');
 
@@ -19,11 +19,11 @@ if(isset($_GET['Id_sessao'])){
 if(isset($_POST['comprar'])){
      
    //Limpando a query
-   //echo 'Comprar';
+
    $Id_sessao =  mysqli_real_escape_string($conn,$_POST['Id_sessao']);
    $id_sessao = $Id_sessao;
    include('lugares_conec.php'); 
-   //echo $Id_sessao;
+
    $lu =  mysqli_real_escape_string($conn,$_POST['Lugar']);
 
    //Verificando lugar
@@ -31,7 +31,7 @@ if(isset($_POST['comprar'])){
 
    if(empty($_POST['Lugar'])){
       
-    //echo 'Lugar obrigatório <br/>';
+    
     $erros['Lugar'] = "Lugar obrigatório";
    }else{
 
@@ -43,13 +43,13 @@ if(isset($_POST['comprar'])){
           $rl = mysqli_query($conn,$sqllugar);
           $lug = mysqli_fetch_assoc($rl);
           
-          //echo $lug['Ocupado'];
+         
           if($lug && $lug['Ocupado'] != 1){
             $Lugar = $_POST['Lugar'];  
-            //echo "Lugar funcionou";
+           
           }else{
               $erros['Lugar'] = "Digite outro lugar.";
-              //echo "Lugar não encontrado, digite outro.";  
+              
           }
           
      }
@@ -58,44 +58,41 @@ if(isset($_POST['comprar'])){
     //Verificando tipo
 
     if(empty($_POST['Tipo'])){
-        //echo 'Tipo obrigatório <br/>';
+       
         $erros['Tipo'] = "Tipo obrigatório";
     }else{
         $tp = array('Meia','Meia-entrada','Meia-Entrada','Meia Entrada','MEIA ENTRADA','meia entrada','meia-entrada','meia','MEIA-ENTRADA','Inteira','inteira','INTEIRA','Inteiro','inteiro','INTEIRO');
         
         if(in_array($_POST['Tipo'],$tp )){
             $Tipo = $_POST['Tipo'];
-            //echo 'Tipo funcionou';
+          
         }else{
             $erros['Tipo'] = "Digite tipo válido";
-            //echo "Digite tipo válido";
+         
         }
 
     }
 
     //Verificando preço
     if(empty($_POST['Preco'])){
-        //echo 'Preço obrigatório <br/>';
+       
         $erros['Preco'] = "Preço obrigatório";
     }else{
-        //$_POST['Preco']
+       
         $tep = str_replace(',','.',strval($_POST['Preco']));
         if(!is_numeric(floatval($tep))){
           $erros['Preco'] = "Digite valor numero pro preço";
-          //echo 'Digite valor numero pro preço';
+       
         }else{
             $Preco = round(floatval($tep),2);
-            //echo 'Preço funcionou';
+            
         }
     }
 
     if (array_filter($erros)){
         //echo 'Erro no formulário <br/>';
     }else{
-        //$Id_sessao =  mysqli_real_escape_string($conn,$_POST['Id_sessao']);
-
-        
-
+       
         //Adicionar ingresso
         $ading = "INSERT INTO ingresso(Id_sessao,Id_lugar,Preco,Tipo) VALUES ($Id_sessao,$Lugar,$Preco,'$Tipo');";
 
@@ -149,31 +146,32 @@ function cor_assento($ocu){
 
 
 <br>
+
+    <div style=" display: flex; flex-wrap: wrap; align-items: center; justify-content:center"  >
+    <?php  for($c = 1;$c <= intval($lc['Colunas']) ;$c++){ ?>
     
-    <?php //include('__lugares_falho.php'); ?>
     
-<?php  for($c = 1;$c <= intval($lc['Colunas']) ;$c++){ ?>
     
-    <div >
-    <div >
         <?php foreach($lugares as $lugar){ ?>
         
          
-            <?php if($lugar['Coluna'] == $c){ ?>
-        <div  style="display: inline-block;  "  >
-        
-        <img src="assento.png" alt="assento" style="background-color:<?php echo cor_assento($lugar['Ocupado'])?>; width:40px; height:40px; ">
-        <?php echo htmlspecialchars($lugar['Id_lugar'])?>
+        <?php if($lugar['Coluna'] == $c){ ?>
+            <div   >
+            
+            <img src="assento.png" alt="assento" style="background-color:<?php echo cor_assento($lugar['Ocupado'])?>; width:40px; height:40px; ">
+            <?php echo htmlspecialchars($lugar['Id_lugar'])?>
+            <?php }?>
+            
+            
+            
+            </div>
         <?php }?>
-        
-        
-        
-        </div>
         <?php }?>
-    </div>  
-    </div>   
     
-<?php }?>
+    </div>
+      
+    
+
    
 <hr>
    

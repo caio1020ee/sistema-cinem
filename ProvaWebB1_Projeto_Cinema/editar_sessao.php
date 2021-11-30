@@ -54,14 +54,14 @@ if(isset($_POST['editar'])){
     
     $Id_sessao = mysqli_real_escape_string($conn,$_POST['Id_sessao']);
     $Sessao_id = $Id_sessao;
-    //SELECT s.Id_sessao AS Codigo, s.Id_sala AS Sala, f.Nome AS Filme, s.Dia AS Dia , s.Hora AS Hora FROM sessao s, filme f WHERE s.Id_filme = f.Id and s.Id_sessao = $Id_sessao;
+    
 
     //Monta a query
 	$sql = "SELECT * FROM sessao WHERE Id_sessao = $Id_sessao;";
     
     //Executa a query e guarda em $result
 	$result = mysqli_query($conn,$sql);
-    //echo $result;
+    
 
     //Busca o resultado (uma linha) em forma de vetor
 	$sessao = mysqli_fetch_assoc($result);
@@ -85,23 +85,23 @@ if(isset($_POST['editar'])){
 if(isset($_POST['salvar'])){
     //Verificando sala
    if(empty($_POST['Sala'])){
-    //echo 'Sala obrigatória';
+    
     $erros['Sala'] = 'Sala obrigatória';
     }else{
      
      if(is_numeric($_POST['Sala'])){
-        //echo 'Numerico';
+       
         $sa = mysqli_real_escape_string($conn,$_POST['Sala']);
         $salasql = "SELECT * FROM sala WHERE Numero = $sa;"; 
         $res_sala = mysqli_query($conn,$salasql);        
         $salaTeste = mysqli_fetch_assoc($res_sala);
-        //echo $salaTeste;
+      
          if($salaTeste){
              //Há sala com PK com o valor de Id
              $Sala = $_POST['Sala'];
          }else{
              $erros['Sala'] = 'Digite sala válida';
-             //echo 'Não há sala com esse id';
+            
          } 
          mysqli_free_result($res_sala);
      }else{
@@ -111,37 +111,34 @@ if(isset($_POST['salvar'])){
 
     //Verificando hora
     if(empty($_POST['Hora'])){
-        //echo 'Hora obrigatória';
+       
         $erros['Hora'] = 'Hora obrigatória';
     }else{
-     //echo $_POST['Hora'];   
+       
      $horario = mysqli_real_escape_string($conn,$_POST['Hora']); 
       
-     
-     //$horario = date('h:i');
-     //var_dump($horario instanceof DateTime);
      
      if(validarHora(strval($horario))){
          //Hora está certa
          $Hora = $horario;
-         //echo 'Hora certa';
+        
      }else{
          $erros['Hora'] = 'Hora errada';
-         //echo 'Hora errada';
+        
      }
  
     }
  
     //Validando dia
     if(empty($_POST['Dia'])){
-      //echo 'Dia obrigatório';
+    
       $erros['Dia'] = 'Dia obrigatório';
     }else{
         $dd = mysqli_real_escape_string($conn,$_POST['Dia']);
  
         if(validarDia(strval($dd))){
             $Dia = $dd;
-            //echo 'Dia certo';
+          
         } else{
             $erros['Dia'] = 'Dia errado';
         }
@@ -149,27 +146,25 @@ if(isset($_POST['salvar'])){
 
     //Verificando id_filme
     if(empty($_POST['Id_filme'])){
-        //echo 'Código do filme obrigatória';
         $erros['Id_filme'] = 'Código do filme obrigatório';
     }else{
         
         if(is_numeric($_POST['Id_filme'])){
-        //echo 'Numerico';
         $idfi = mysqli_real_escape_string($conn,$_POST['Id_filme']);
         $idfisql = "SELECT * FROM filme WHERE Id = $idfi AND Status_filme = 'Em cartaz';"; 
         $res_filme = mysqli_query($conn,$idfisql);        
         $idfiTeste = mysqli_fetch_assoc($res_filme);
-        //echo $salaTeste;
+    
             if($idfiTeste){
                 //Há sala com PK com o valor de Id
                 $Id_filme = $_POST['Id_filme'];
             }else{
                 $erros['Id_filme'] = 'Digite código de filme válido';
-                //echo 'Filme invalido';
+             
             } 
             mysqli_free_result($res_filme);
         }else{
-            //echo 'Código de filme não numerica';
+        
             $erros['Id_filme'] = 'Digite código numérico';
         }
     }
@@ -214,7 +209,7 @@ if(isset($_POST['salvar'])){
 <!DOCTYPE html>
 
 <?php include('templates/header.php'); ?>
-<?php //echo $Id_sessao?>
+
 <section class="container grey-text">
 		<h4 class="center blue-text">Editar</h4>
         <form class="white" action="editar_sessao.php" method="POST" style="padding: 20px;">
@@ -244,7 +239,7 @@ if(isset($_POST['salvar'])){
             </div>
             <!--Botão de cancelar edição-->
             <div class="center" style="margin-top: 10px solid; display: inline-block;">
-            <!--input type="hidden" name="Id" value="<?php echo $Id ?>">-->
+         
             <input type="hidden" name="Id_sessao" value="<?php echo $Id_sessao ?>">
             <input type="submit" name="cancelar" value="Cancelar" class="btn brand z-depth-0">
             </div>

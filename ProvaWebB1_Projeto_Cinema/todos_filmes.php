@@ -17,9 +17,7 @@
   //fecha conexão
   mysqli_close($conn);
 
-  //print_r($pizzas);
-  //print_r($filmes[0]['Nome']);
-  # Mesma finalidade do comando split
+
   
 
 
@@ -29,7 +27,7 @@
 
 <!DOCTYPE html>
 <html>
-	
+	<link rel="stylesheet" href="estilos/estilo.css">
 	<?php include('templates/header.php'); ?>
 	
 	<h4 class="center blue-text">Todos os Filmes</h4>
@@ -38,20 +36,20 @@
     <div class="container" >
       <div class="column">
          
-        <!--class="card z-depth-0" -->
+      
         <?php foreach($filmes as $filme) {?>
-         <div  style="border: 2px solid; color:black;     background-color:white">
+         <div  class="caixa_filme">
             <div class="row" style="display:flex">
                 
                 <div class="column" style="padding: 3px;" >
                 
-                <img src="posteres/<?php echo htmlspecialchars($filme['Poster']) ?>" alt="poster" style="width: 150px;height:200px">
+                <img src="posteres/<?php echo htmlspecialchars($filme['Poster']) ?>" alt="poster" class="poster">
               
 
               
                 </div>
                <!--Segunda coluna--> 
-                <div class="column card-content" style="font-size: 15px; color: black ;padding: 10px;">
+                <div class="column card-content info_filme">
                    <p>Nome: <?php echo htmlspecialchars($filme['Nome']) ?></p>
                    <p>Diretor: <?php echo htmlspecialchars($filme['Diretor']) ?></p>
                    <p>Genêro: <?php echo htmlspecialchars($filme['Genero']) ?></p>
@@ -66,7 +64,7 @@
            </div>
            <?php if($filme['Status_filme'] == 'Em cartaz'){?>
            <!--Botão das sessões-->
-           <div class="card-action center-align" style="font-size: 30px; background-color:lightyellow; border-top:red; border: 10px">
+           <div class="card-action center-align btn_sessoes" >
 							<a class="brand-text" href="sessoes.php?Nome=<?php echo $filme['Nome']?>">Sessões</a>
 					 </div>
            <?php } ?>

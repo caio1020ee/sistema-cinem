@@ -2,7 +2,7 @@
 
 
     $sql = "SELECT l.Id_lugar as Id_lugar,L.Id_sessao AS Id_sessao,l.Id_sala as Id_sala,l.Linha as Linha, l.Coluna as Coluna,l.Ocupado as Ocupado,sa.Colunas as Total_colunas, sa.Linhas as Total_linhas FROM lugar l, sala sa WHERE Id_sessao = $Id_sessao AND L.Id_sala = sa.Numero;";
-    //echo $sql;   
+   
     $result =  mysqli_query($conn,$sql);
     $lugares = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
@@ -27,11 +27,7 @@
  
     mysqli_free_result($result2);
 
-
-    
-    //mysqli_free_result($result3);
-    //fecha conexão
-   
+    //Conexão é fechada depois
 
 
 

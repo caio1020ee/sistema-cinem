@@ -1,0 +1,118 @@
+/* Index */
+.caixa_filme{
+    border: 2px solid;
+    color:black;
+    background-color:white;
+    
+}
+
+
+
+
+
+.poster{
+    width: 150px;
+    height:200px;
+}
+
+.info_filme{
+    font-size: 15px; 
+    color: black; 
+    padding:10px;
+}
+
+.btn_sessoes{
+    font-size: 30px;
+    background-color:lightyellow; 
+    border-top:red;
+}
+
+/*ad_imagem*/
+
+.ao_redor_caixa_desc_filme{
+    padding-left: 50px; 
+    padding-right: 50px;  
+    padding-top:30px;
+}
+
+.cx_fl_adi{
+    /*Caixa filme ad_imagem*/
+    border: 2px solid;
+    color:black;
+    background-color:white;
+    padding: 10px;
+    font-size: 15px;
+}
+
+/*editar_filme*/
+.btns{
+    margin-top: 10px solid;
+    display: inline-block;
+}
+
+/*administracao*/
+
+.item_opc{
+    /*Por algum motivo apenas a largura está mostrando sinais de que
+    está funcionando nos componentes em que coloquei a classe.*/
+    color:black; width:300px; height:45px; border: 1px solid; border-color:black;
+}
+
+/*ingresso_pronto*/
+
+.ao_redor_ingresso{
+    padding-left: 100px; padding-right: 100px;  padding-top:30px;
+}
+
+.ingresso{
+    background-color:red;  border: 1px solid; border-color:black;
+}
+
+/*lista_salas_adm.php*/
+.flexs{
+    display: flex; justify-content: center;
+}
+
+.info_sala{
+    /*Mesmo problema do item_opc*/
+    border: 1px solid; border-color:black;
+}
+
+.sem_salas{
+    background-color:red; width:300px; height:45px; border: 1px solid; border-color:black;
+}
+
+/*listadesessoes*/
+
+.sessao{
+    background-color:red;  border: 1px solid; border-color:black; 
+}
+
+/*sessao_adm*/
+.flexea{
+    display: flex; justify-content: space-around;
+}
+
+/*sessoes*/
+
+.pad_e50_d50{
+    padding-left: 50px;
+    padding-right:50px;
+}
+
+/*todos_ingressos*/
+.caixa_ingresso{
+    background-color:white; 
+    border: 5px solid; 
+    color:grey; 
+    display:flex;
+}
+
+.info_ingresso{
+    font-size: 15px; 
+    color: black;
+}
+
+
+
+

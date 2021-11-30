@@ -17,9 +17,7 @@
   //fecha conexão
   mysqli_close($conn);
 
-  //print_r($pizzas);
-  //print_r($filmes[0]['Nome']);
-  # Mesma finalidade do comando split
+
   
 
 
@@ -29,7 +27,7 @@
 
 <!DOCTYPE html>
 <html>
-	
+	<link rel="stylesheet" href="estilos/estilo_novo.css">
 	<?php include('templates/header.php'); ?>
 
 	<ul id="nav-mobile" class="center-align">
@@ -43,32 +41,24 @@
     <div class="container" >
       <div class="column">
          
-        <!--class="card z-depth-0" -->
+
         
         <?php foreach($filmes as $filme) {?>
 
-            <ul>
-              <li>
+         
+           
                 <div class="row">
-                  <div class="left-align"style="padding-left: 50px; display:inline-block;">
+                  <div class="left-align"style="padding-left: 50px; ">
                 
-                  <a href="filme_adm.php?Id=<?php echo $filme['Id']?>">
-                  <div  class="center-align btn yellow" style="color:black;  border: 1px solid; border-color:black;  "><?php echo htmlspecialchars($filme['Nome']) ?>  </div>
+                  <a class="#" href="filme_adm.php?Id=<?php echo $filme['Id']?>">
+                  <div  class="center-align yellow item_lst_filme"><?php echo '- '.htmlspecialchars($filme['Nome']) ?> </div>
                   </a>
                 
                   </div>
-                
-                 
-                  
-
-                  <!---->
-
-
-
 
                 </div>
-              </li>
-            </ul>
+          
+          
             
          
         <?php } ?>

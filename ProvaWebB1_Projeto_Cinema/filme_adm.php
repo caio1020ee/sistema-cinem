@@ -9,10 +9,9 @@ if(isset($_GET['Id'])){
     
     //Monta a query
 	$sql = "SELECT * FROM filme WHERE Id = $Id;";
-    //echo $sql;
     //Executa a query e guarda em $result
 	$result = mysqli_query($conn,$sql);
-    //echo $result;
+  
 
 	//Busca o resultado (uma linha) em forma de vetor
 	$filme = mysqli_fetch_assoc($result);
@@ -24,7 +23,7 @@ if(isset($_GET['Id'])){
     $tam =  "SELECT COUNT(*) FROM sessao WHERE Id_filme = $Id;";
     $restam = mysqli_query($conn,$tam);
     $tamanho_sessoes =  mysqli_fetch_assoc($restam);
-    //echo $tamanho_sessoes['COUNT(*)'];
+
 
     //-----------------Sessões-------------------
     $se_sql = "SELECT * FROM sessao WHERE Id_filme = $Id;";
@@ -33,9 +32,9 @@ if(isset($_GET['Id'])){
     mysqli_free_result($se_result);
     //-------------------------------------------
    
-    //echo $sessoes;
+ 
 		
-	mysqli_close($conn);
+	
 }else{
     //echo 'Erro';
 }
@@ -71,6 +70,13 @@ if(isset($_POST['deletar'])){
  
  }
 
+ if(isset($_POST['alt_poster'])){
+    $Id = mysqli_real_escape_string($conn,$_POST['Id']);
+    header('Location: ad_imagem.php?Id='.$Id);
+ }
+
+ mysqli_close($conn);
+
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +110,7 @@ if(isset($_POST['deletar'])){
             
 
         </div>
-        <!--Botôes -->
+     
         
 
         
@@ -113,27 +119,38 @@ if(isset($_POST['deletar'])){
 <br>
 
 <!--Botôes-->
-<div class="center-align" >            
+<div class="center-align" style="display: flex; justify-content:space-around" >            
         
-<!--Botão de editar-->
-    <form action="editar_filme.php" method="POST" class="center" style="display: inline-block;">
+    <!--Botão de editar-->
+    <form action="editar_filme.php" method="POST" class="center" >
        <input type="hidden" name="Id" value = "<?php echo $filme['Id'];?>">
        <input type = "submit" name ="editar" value = "Editar" class="btn green  z-depth-0"> 
             
     </form> 
 
-    <!--Botão de excluir -->
-    <form action="filme_adm.php" method="POST" class="center" style="display: inline-block;">
-        <input type="hidden" name="Id" value = "<?php echo $filme['Id'];?>">
-        <input type = "submit" name ="deletar" value = "Deletar" class="btn red z-depth-0"> 
-    </form>  
-
     <!--Botão de adicionar sessão-->
-    <form action="addsessao.php" method="POST" class="center" style="display: inline-block;">
+    <form action="addsessao.php" method="POST" class="center" >
         <input type="hidden" name="Id" value = "<?php echo $filme['Id'];?>">
         <input type = "submit" name ="adses" value = "Adicionar sessão" class="btn brand z-depth-0"> 
             
     </form>
+
+    <!--Botão de alterar poster -->
+    <form action="#" method="POST" class="center" >
+            <input type="hidden" name="Id" value = "<?php echo $filme['Id'];?>">
+            <input type = "submit" name ="alt_poster" value = "Alterar Poster" class="btn yellow z-depth-0"> 
+    </form> 
+
+    <!--Botão de excluir -->
+    <form action="filme_adm.php" method="POST" class="center" >
+        <input type="hidden" name="Id" value = "<?php echo $filme['Id'];?>">
+        <input type = "submit" name ="deletar" value = "Deletar" class="btn red z-depth-0"> 
+    </form> 
+    
+   
+    
+
+    
 </div>  
 </div>
 

@@ -1,28 +1,17 @@
 <?php
- include('config/conexao.php');
+   include('config/conexao.php');
 
- $erros = array('Nome' => '' , 'Diretor' => '','Estudio'=> '','Duracao' => '','Protagonista'=>'','Sinopse'=>'','Genero' => '','Poster'=>'' );
- $Nome = $Diretor = $Estudio = $Duracao = $Protagonista = $Sinopse = $Genero= $Poster ='';
+   $erros = array('Nome' => '' , 'Diretor' => '','Estudio'=> '','Duracao' => '','Protagonista'=>'','Sinopse'=>'','Genero' => '','Poster'=>'' );
+   $Nome = $Diretor = $Estudio = $Duracao = $Protagonista = $Sinopse = $Genero= $Poster ='';
 
     if(isset($_POST['enviar'])){
-      //Verificar poster
-
-	  
-
-	  
-
 	  //Verificar se nome está vazio
       if(empty($_POST['Nome'])){
-		 //echo 'Nome obrigatório <br/>';
+		
 		 $erros['Nome'] = 'Nome obrigatório';
 	  }else{
          $Nome = $_POST['Nome'];
-	     //if(!preg_match('/^[0-9a-zA-ZÀ-ú\s]+$/',$Nome)  ){
-          //$erros['Nome'] = 'Digite nome válido';
-		  //$Nome = '';
-	      //}else{
-		  // echo htmlspecialchars($_POST['Nome']).'<br/>';
-		  //}
+	     
 	  }
 
 	   //Verificar se diretor está vazio
@@ -34,7 +23,7 @@
 		      $erros['Diretor'] = 'Digite diretor válido';
 		      $Diretor = '';
 	      }else{
-		      //echo htmlspecialchars($_POST['Diretor']).'<br/>';
+		    
 	      }
 	  }
 
@@ -47,7 +36,7 @@
 			 $erros['Genero'] = 'Digite genero válido';
 			 $Diretor = '';
 		 }else{
-			 //echo htmlspecialchars($_POST['Genero']).'<br/>';
+			
 		 }
 	 }
 	   //Verificar se estudio está vazio
@@ -58,8 +47,6 @@
 	       if(!preg_match('/^[0-9a-zA-ZÀ-ú\s]+$/',$Estudio)  ){
 		       $erros['Estudio'] = 'Digite Estudio válido';
 		       $Estudio = '';
-	       }else{
-		       //echo htmlspecialchars($_POST['Estudio']).'<br/>';
 	       }
 	   }
 
@@ -67,10 +54,7 @@
 	   if(empty($_POST['Duracao'])){
 		  $erros['Duracao']= 'Duração obrigatório <br/>';
 	   }else{
-	       $Duracao = $_POST['Duracao'];
-	       
-		       // echo htmlspecialchars($_POST['Duracao']).'<br/>';
-	        
+	       $Duracao = $_POST['Duracao'];	        
  	    }  
 	    //Verificar se protagonista está vazio
 	    if(empty($_POST['Protagonista'])){
@@ -80,8 +64,6 @@
 	         if(!preg_match('/^[a-zA-ZÀ-ú\s]+$/',$Protagonista)){
 		           $erros['Protagonista'] = 'Digite Protagonista válido';
 		           $Protagonista = '';
-	         }else{
-		          //echo htmlspecialchars($_POST['Protagonista']).'<br/>';
 	         }
  	    }
 
@@ -90,12 +72,8 @@
 		    $erros['Sinopse'] = 'Sinopse obrigatório <br/>';
 	      }else{
 	          $Sinopse = $_POST['Sinopse'];
-	          //if(!preg_match('/^[0-9a-zA-ZÀ-ú\s]+$/',$Sinopse)  ){
-		 //$erros['Sinopse'] = 'Digite sinopse válida';
-		 //$Sinopse = '';
-	  //}else{
-		      //echo htmlspecialchars($_POST['Sinopse']).'<br/>';
-	  //}
+	         
+	  
 	       }
 
 

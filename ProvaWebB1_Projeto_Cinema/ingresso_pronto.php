@@ -15,7 +15,7 @@ if(isset($_GET['Id_ingresso'])){
     
     //Executa a query e guarda em $result
 	$result = mysqli_query($conn,$sql);
-    //echo $result;
+
 
     //Busca o resultado (uma linha) em forma de vetor
 	$ingresso = mysqli_fetch_assoc($result);
@@ -39,13 +39,14 @@ if(isset($_GET['Id_ingresso'])){
 
 <!DOCTYPE html>
 
+<link rel="stylesheet" href="estilos/estilo.css">
 <?php include('templates/header.php'); ?>
 
-<div style="padding-left: 50px; padding-right: 50px;  padding-top:30px">
-<div class="center-align"style="padding-left: 50px; padding-right:50px">
+<div class="ao_redor_ingresso" >
+
    
-   <a href="#">
-       <div  class=" column card-content left-align blue" style="background-color:red;  border: 1px solid; border-color:black;  ">
+  
+       <div  class=" column card-content left-align blue ingresso">
 <pre style="color: black;">
 Ingresso: <?php echo htmlspecialchars($ingresso['Ingresso'])?>   
 Tipo: <?php echo htmlspecialchars($ingresso['Tipo'])?> 
@@ -59,9 +60,9 @@ Hora: <?php echo htmlspecialchars($ingresso['Hora'])?>
 
       
        </div>
-   </a>
+  
 
-   </div>
+ 
 <br>
 
 <!--Botôes-->

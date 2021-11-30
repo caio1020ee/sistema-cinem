@@ -7,7 +7,6 @@ include('config/conexao.php');
     
     //Monta a query
 	$sql = "SELECT * FROM sala ;";
-    //echo $sql;
 
     //Executa a query e guarda em $result
 	$result = mysqli_query($conn,$sql);
@@ -22,7 +21,7 @@ include('config/conexao.php');
 
 
     if(isset($_POST['deletar'])){
-    //echo 'Chega';    
+    
     //Limpando a query
     $ns= mysqli_real_escape_string($conn,$_POST['Numero_sala']);
     
@@ -57,7 +56,7 @@ include('config/conexao.php');
 ?>
 
 <!DOCTYPE html>
-
+<link rel="stylesheet" href="estilos/estilo.css">
 <?php include('templates/header.php'); ?>
 
 <h2 class="center">Lista de salas</h2>
@@ -65,16 +64,20 @@ include('config/conexao.php');
 <?php if($salas): ?>
 
 <?php foreach ($salas as $sala) {?>
-    <div class="center-align">
-        <div class="center-align"style="padding-left: 50px; padding-right:50px; display: inline-block;">
+    <div class="center-align flexs">
+
         
-            <div  class="center-align btn red" style="background-color:red;  border: 1px solid; border-color:black; ">Sala <?php echo htmlspecialchars($sala['Numero'])?>  Linhas: <?php echo htmlspecialchars($sala['Linhas'])?> Colunas: <?php echo htmlspecialchars($sala['Colunas']) ?> Assentos: <?php echo htmlspecialchars($sala['Assentos']) ?>  </div>
-        
+
+        <div  class="center-align btn red" style="  border: 1px solid; border-color:black; ">Sala <?php echo htmlspecialchars($sala['Numero'])?>  Linhas: <?php echo htmlspecialchars($sala['Linhas'])?> Colunas: <?php echo htmlspecialchars($sala['Colunas']) ?> Assentos: <?php echo htmlspecialchars($sala['Assentos']) ?>  
         </div>
-        <form action="lista_salas_adm.php" method="POST" class="center" style="display: inline-block;">
+
+        <div style="width: 10px;"></div>
+
+        <form action="lista_salas_adm.php" method="POST" class="center" >
             <input type="hidden" name="Numero_sala" value = "<?php echo $sala['Numero'];?>">
             <input type = "submit" name ="deletar" value = "Deletar" class="btn red z-depth-0">
         </form>
+
     </div>
 
     <hr>
